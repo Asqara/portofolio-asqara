@@ -1,36 +1,73 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ALFATH_ Engineering Portfolio
 
-## Getting Started
+A statically generated engineering portfolio for Alfath Asqar Tsani. The site presents full-stack systems, data infrastructure, platform engineering, production operations, experience, and education through a cyber-brutalist editorial interface.
 
-First, run the development server:
+## Stack
+
+- Next.js 16 App Router
+- React 19 and TypeScript
+- Tailwind CSS 4
+- Framer Motion
+- `lottie-react`
+- `next-themes`
+- Local JSON content and local artwork
+
+## Local development
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+pnpm install
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open `http://localhost:3000`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Production verification:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+pnpm build
+pnpm start
+```
 
-## Learn More
+## Content editing
 
-To learn more about Next.js, take a look at the following resources:
+Portfolio content is kept outside the presentation layer:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```text
+data/
+  projects.json
+  experience.json
+  skills.json
+  education.json
+  site.json
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Edit these files directly. Project components automatically omit unavailable links, empty galleries, and empty metric collections.
 
-## Deploy on Vercel
+## Adding a project
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Add a new object to `data/projects.json` with a unique `id` and `slug`. The reusable schema supports title, subtitle, year, role, category, descriptions, challenge, solution, impact, URLs, artwork, gallery, stack, capabilities, metrics, featured/highlight state, production status, and platform description.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Set `featured` to `true` for inclusion on the home page. The `/work/[slug]` case-study route and its metadata are generated automatically.
+
+## Project artwork
+
+- Cover: `1600 × 1000` (8:5)
+- Gallery: `1600 × 1000` or `1920 × 1200`
+- Store assets under `public/images/projects/`
+- Use stable 8:5 framing; dashboard captures should be composed for top-center positioning
+
+The starter artwork is local SVG system art so the repository ships without remote image dependencies.
+
+## Theme behavior
+
+Theme preference uses `next-themes`, follows the operating-system preference initially, and persists the user choice. Light and dark modes have separate surface, text, and border tokens documented in `design.md`.
+
+## Deployment
+
+No API, database, environment variable, or persistent service is required.
+
+1. Import the repository into Vercel.
+2. Keep the detected Next.js defaults.
+3. Deploy.
+
+Update the canonical origin (`https://asqara.dev`) in `src/app/layout.tsx`, `src/app/sitemap.ts`, and `src/app/robots.ts` if the production domain differs.
