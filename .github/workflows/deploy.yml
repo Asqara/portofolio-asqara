@@ -111,12 +111,16 @@ jobs:
           install -m 700 -d ~/.ssh
           printf '%s\n' "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
+          # Fails fast on a malformed secret; compare this fingerprint with
+          # `ssh-keygen -lf ~/.ssh/authorized_keys` on the server.
+          ssh-keygen -lf ~/.ssh/deploy_key
           cat > ~/.ssh/config <<EOF
           Host homelab
             HostName ${SSH_HOST}
             User ${SSH_USER}
             IdentityFile ~/.ssh/deploy_key
             IdentitiesOnly yes
+            BatchMode yes
             StrictHostKeyChecking accept-new
             ServerAliveInterval 30
           EOF

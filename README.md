@@ -84,7 +84,7 @@ docker run --rm -p 3000:3000 portofolio-asqara
 2. Add the deploy public key to that user's `~/.ssh/authorized_keys` (`ssh-keygen -t ed25519 -f deploy_key -N ""`).
 3. Tailscale admin console:
    - Access controls: declare `tag:ci` in `tagOwners` and allow `tag:ci` to reach the server on port 22.
-   - Settings → Trust credentials → Credential → **OpenID Connect**: issuer *GitHub Actions*, subject `repo:Asqara/portofolio-asqara:environment:production`, scope `auth_keys` (write) with tag `tag:ci`. Copy the Client ID and Audience.
+   - Settings → Trust credentials → Credential → **OpenID Connect**: issuer *GitHub Actions*, subject `repo:Asqara@159613080/portofolio-asqara@1333292339:environment:production` (this repo uses GitHub's immutable OIDC subject; check with `gh api repos/Asqara/portofolio-asqara/actions/oidc/customization/sub`), scope `auth_keys` (write) with tag `tag:ci`. Copy the Client ID and Audience.
 4. nginx: copy `deploy/nginx/portofolio-asqara.conf` into `/etc/nginx/conf.d/`, adjust `server_name`, then `sudo nginx -t && sudo systemctl reload nginx`.
 5. Cloudflare Tunnel: point the public hostname (e.g. `asqara.tech`) at `http://localhost:80` (nginx).
 
