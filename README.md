@@ -99,7 +99,7 @@ The container publishes only on `127.0.0.1:3000`. To use another port, put `APP_
 | `SSH_HOST` | secret | server's MagicDNS name or `100.x.y.z` Tailscale IP |
 | `SSH_USER` | secret | deploy user on the server |
 | `SSH_PRIVATE_KEY` | secret | contents of `deploy_key` |
-| `DEPLOY_PATH` | variable (optional) | defaults to `~/apps/portofolio-asqara` |
+| `DEPLOY_PATH` | variable (optional) | defaults to `~/server/apps/portofolio-asqara` |
 | `DOCKER_PLATFORM` | variable (optional) | defaults to `linux/amd64`; use `linux/arm64` for ARM servers |
 
 The deploy job runs in the `production` environment, so protection rules (manual approval, etc.) can be added there.
