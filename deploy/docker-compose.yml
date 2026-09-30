@@ -1,0 +1,17 @@
+# Runs on the homelab server. The GitHub workflow copies this file to
+# $DEPLOY_PATH and writes IMAGE=<tag> into .env next to it before `up -d`.
+#
+# The app only listens on the host's loopback; nginx on the host proxies to it
+# (see deploy/nginx/portofolio-asqara.conf). Override the port with APP_PORT
+# in $DEPLOY_PATH/.env.
+
+name: portofolio-asqara
+
+services:
+  web:
+    image: ${IMAGE:-ghcr.io/asqara/portofolio-asqara:latest}
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:${APP_PORT:-3000}:3000"
+    environment:
+      NODE_ENV: production

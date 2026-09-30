@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: LayoutProps<"/[locale]">): Pr
   const canonical = locale === routing.defaultLocale ? "/" : `/${locale}`;
 
   return {
-    metadataBase: new URL("https://asqara.dev"),
+    metadataBase: new URL("https://asqara.tech"),
     title: { default: t("Alfath Asqar Tsani — Software Engineer"), template: `%s — Alfath Asqar Tsani` },
     description: t("Portfolio of Alfath Asqar Tsani, a computer science student and software engineer working across full-stack development, data infrastructure, and production systems."),
     alternates: { canonical, languages: { en: "/", id: "/id", "x-default": "/" } },
@@ -34,7 +34,7 @@ export async function generateMetadata({ params }: LayoutProps<"/[locale]">): Pr
 }
 
 const personSchema = {
-  "@context": "https://schema.org", "@type": "Person", name: "Alfath Asqar Tsani", url: "https://asqara.dev",
+  "@context": "https://schema.org", "@type": "Person", name: "Alfath Asqar Tsani", url: "https://asqara.tech",
   sameAs: ["https://github.com/Asqara", "https://www.linkedin.com/in/asqaraa"], jobTitle: "Software Engineer",
   alumniOf: { "@type": "CollegeOrUniversity", name: "IPB University" },
   address: { "@type": "PostalAddress", addressLocality: "Bogor", addressCountry: "ID" }
